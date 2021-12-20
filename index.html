@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 
+<input type="text" id="email">
 <button onclick="myFunction()">Button</button>
 
 <script>
     function myFunction() {
-        fetch("https://webentwicklung-beleg-backend.herokuapp.com/")
+        var text_field = document.getElementById("email");
+        var data = text_field.value;
+        console.log(data);
+        fetch("https://webentwicklung-beleg-backend.herokuapp.com/", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+        })
         .then(res => res.text())
         .then(data => console.log(data))
         .catch(error => console.log(error));
