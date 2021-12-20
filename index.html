@@ -7,6 +7,7 @@
     function myFunction() {
         var text_field = document.getElementById("email");
         var data = text_field.value;
+        console.log(JSON.stringify(data));
         fetch("https://webentwicklung-beleg-backend.herokuapp.com/", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
