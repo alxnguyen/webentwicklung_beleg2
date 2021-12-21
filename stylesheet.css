@@ -1,0 +1,90 @@
+html {background-color: #fcfccc}
+
+.box {
+    display: flex;
+    width: 300px;
+    height: 200px;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+    background-color: bisque;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 50px;
+}
+
+img.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+
+.center {
+    display: block;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grail {
+    display: flex;
+    flex-direction: column;
+    margin-left: 150px;
+	margin-right: 150px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    margin-bottom: 50px;
+	background-color: #e0ffff;
+	border: 1px solid black;
+	justify-content: space-between
+}
+
+
+#map_pic {
+    width: 100%;
+}
+
+button {
+    margin-top: 10px;
+}
+
+
+ table	{
+	 width: 100%;
+	 margin-top: 20px;
+	 background-color: bisque;
+	 border: 1px solid black;
+ }
+td {
+  border: 1px solid black;
+  background-color: #fff6e9;
+}
+
+.bCollumn	{
+	width: 7%;
+	border: 0px;
+	background-color: bisque;
+}
+
+.editwindow 	{
+	gap: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+#map {
+  height: 98vh
+}
+
+#warning {
+    color:red
+}
