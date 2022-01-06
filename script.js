@@ -6,6 +6,7 @@ function myFunction() {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: json_data
+	credentials: 'include'
     })
     .then(res => res.text())
     .catch(error => console.log(error));
