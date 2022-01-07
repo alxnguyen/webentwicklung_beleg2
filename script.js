@@ -5,8 +5,7 @@ function myFunction() {
     fetch("https://webentwicklung-beleg-backend.herokuapp.com/", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: json_data,
-        credentials: "include"
+        body: json_data
     })
     .then(res => res.text())
     .catch(error => console.log(error));
