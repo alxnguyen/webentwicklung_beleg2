@@ -24,7 +24,7 @@ function register() {
         return;
     }
     const json_data = JSON.stringify({email: email, password: password});
-    fetch("https://webentwicklung-beleg-backend.herokuapp.com/", {
+    fetch("https://webentwicklung-beleg-backend.herokuapp.com/register", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: json_data
