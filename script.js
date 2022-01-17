@@ -37,6 +37,9 @@ function register() {
             if(res.status === 500) {
                 document.getElementById("warning").innerHTML = "Irgendetwas ist schief gelaufen.";
             }
+            if(res.status === 409) {
+                document.getElementById("warning").innerHTML = "Ein Konto mit dieser E-Mail existiert bereits.";
+            }
         })
     .catch(error => console.log(error));
 }
