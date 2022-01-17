@@ -1,4 +1,4 @@
-function myFunction() {
+function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const json_data = JSON.stringify({email: email, password: password});
@@ -11,7 +11,7 @@ function myFunction() {
     .catch(error => console.log(error));
 }
 
-function myFunction2() {
+function register() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const password2 = document.getElementById("password2").value;
@@ -41,6 +41,6 @@ function myFunction2() {
     .catch(error => console.log(error));
 }
 
-function myFunction3() {
+function goToHome() {
     window.location.href = "./index.html";
 }
