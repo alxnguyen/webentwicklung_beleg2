@@ -4,6 +4,7 @@ function login() {
     const json_data = JSON.stringify({email: email, password: password});
     fetch("https://webentwicklung-beleg-backend.herokuapp.com/", {
         method: "POST",
+        mode: "cors",
         headers: {"Content-Type": "application/json"},
         body: json_data,
         credentials: "include"
