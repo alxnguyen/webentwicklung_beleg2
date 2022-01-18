@@ -11,7 +11,7 @@ function login() {
     })
     .then(res => 
         {
-            if(res.status === 2010) {
+            if(res.status === 201) {
                 window.location.href = "./map.html";
             }
 
