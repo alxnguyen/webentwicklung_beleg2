@@ -318,8 +318,23 @@
 			btn2.onclick = function() {lösche(row.rowIndex)};
 			löschen.className = "bCollumn";
 			löschen.appendChild(btn2);
-			trip = [name.innerHTML, land.innerHTML, start.innerHTML, ende.innerHTML, Date.now()];
-			localStorage.setItem(name.innerHTML, JSON.stringify(trip));
+			trip = JSON.stringify([name.innerHTML, land.innerHTML, start.innerHTML, ende.innerHTML, Date.now()]);
+			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: trip,
+			})
+			.then(res => 
+				{
+					if(res.status === 201) {
+						window.location.href = "./map.html";
+					}
+
+					if(res.status === 400) {
+						document.getElementById("warning").innerHTML = "Login fehlgeschlagen.";
+					}
+				})
+			.catch(error => console.log(error));
 		}
 		
 		function bearbeite(index) {
@@ -358,6 +373,13 @@
 		}
 		
 		function load_site() {
+			var data;
+			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
+				method: "GET",
+				headers: {"Content-Type": "application/json"},
+			}).then(res => {
+				data = res.body;
+			})
 			var length = localStorage.length;
 			var table = document.getElementById("table1");
 			var trips = [];
