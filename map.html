@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<header>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+</header>
+<body>
+    <img class="logo" src="http://via.placeholder.com/300x100" alt="placeholder image">
+    <div class="grail">
+        <div class="nav">
+            <a href="edittrip.html">Reise bearbeiten oder entfernen</a>
+			<a href="index.html">zurück zum Login</a>
+        </div>
+        <div id="map">
+           
+        </div>
+    </div>
+	<script>
+		var mymap = L.map('map').setView([51.505, -0.09], 2);
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png	', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(mymap);
+
+	var trips = [];
+	var length = localStorage.length;
+	for(entry in localStorage) {
+		if(length == 0) {break;}
+		var item = JSON.parse(localStorage.getItem(entry));
+		trips.push(item[1]);
+		length--;
+	}
+let unique_countries = [...new Set(trips)];
+const visitedCountries = unique_countries;
+
+const loadData = async () => {
+  const data = await fetch('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_countries.geojson');
+  return data.json();
+}
+
+const displayData = async () => {
+  const geoJson = await loadData();
+  const filteredData = {
+    ...geoJson,
+    features: geoJson.features.filter(feature => 
+                                      !visitedCountries.includes(feature.properties.iso_a2))
+  };
+  L.geoJSON(filteredData).addTo(mymap);
+}
+
+displayData();
+	</script>
+</body>

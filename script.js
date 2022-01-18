@@ -8,7 +8,16 @@ function login() {
         body: json_data,
         credentials: "include"
     })
-    .then(res => res.text())
+    .then(res => 
+        {
+            if(res.status === 2010) {
+                window.location.href = "./map.html";
+            }
+
+            if(res.status === 400) {
+                document.getElementById("warning").innerHTML = "Login fehlgeschlagen.";
+            }
+        })
     .catch(error => console.log(error));
 }
 
