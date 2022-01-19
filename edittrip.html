@@ -378,8 +378,9 @@
 				credentials: "include"
 			}).then(res => {
 				console.log(res.json());
-			}).then(data => {
-				console.log(data);
+				Promise.resolve(res.json()).then(value => {
+					console.log(value);
+				});
 			});
 			var length = data.length;
 			var table = document.getElementById("table1");
