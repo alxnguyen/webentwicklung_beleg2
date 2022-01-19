@@ -381,8 +381,9 @@
 				var length = data.length;
 				var table = document.getElementById("table1");
 				var trips = [];
-				for(var trip in data) {
+				for(var index in data) {
 					if(length === 0) {break;}
+					trip = data[index];
 					console.log(trip);
 					console.log(trip.tripname);
 					new_entry = [trip.tripname, trip.land, trip.start, trip.end, trip.created];
