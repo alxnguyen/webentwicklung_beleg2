@@ -378,24 +378,20 @@
 				credentials: "include"
 			}).then(res => res.json())
 			.then(data => {
-				for(var element in data) {
-					console.log(element);
+				var length = data.length;
+				var table = document.getElementById("table1");
+				var trips = [];
+				for(var trip in data) {
+					if(length === 0) {break;}
+					new_entry = [trip.tripname, trip.land, trip.start, trip.end, trip.created];
+					trips.push(new_entry);
+					length--;
 				}
-			});
-			var length = data.length;
-			var table = document.getElementById("table1");
-			var trips = [];
-			for(var entry in data) {
-				formatted_entry = JSON.parse(data[entry]);
-				console.log(formatted_entry);
-				if(length === 0) {break;}
-				trips.push(JSON.parse(data[entry]));
-				length--;
-			}
-			var sortedTrips = trips.sort(function(a, b) {
+				var sortedTrips = trips.sort(function(a, b) {
 				return a[4] - b[4];
-			});
-			for(var entry in sortedTrips) {	
+				});
+
+				for(var entry in sortedTrips) {	
 				var trip = sortedTrips[entry];
 				let row = table.insertRow();
 				var name = row.insertCell(0);
@@ -424,7 +420,8 @@
 				btn2.onclick = function() {lösche(row.rowIndex)};
 				löschen.className = "bCollumn";
 				löschen.appendChild(btn2);
-			}
+				}
+			});
 		}
 		
 		function format(date)    {
