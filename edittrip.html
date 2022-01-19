@@ -377,9 +377,8 @@
 				headers: {"Content-Type": "application/json"},
 				credentials: "include"
 			}).then(res => {
-				data = res.body;
-				console.log(JSON.parse(res));
-			})
+				console.log(res.json());
+			});
 			var length = data.length;
 			var table = document.getElementById("table1");
 			var trips = [];
