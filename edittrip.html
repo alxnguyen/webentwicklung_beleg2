@@ -384,10 +384,7 @@
 				for(var index in data) {
 					if(length === 0) {break;}
 					trip = data[index];
-					console.log(trip);
-					console.log(trip.tripname);
 					new_entry = [trip.tripname, trip.land, trip.start, trip.end, trip.created];
-					console.log(new_entry);
 					trips.push(new_entry);
 					length--;
 				}
