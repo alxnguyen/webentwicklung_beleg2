@@ -377,10 +377,7 @@
 				headers: {"Content-Type": "application/json"},
 				credentials: "include"
 			}).then(res => {
-				console.log(res.json());
-				Promise.resolve(res).then(value => {
-					console.log(value);
-				});
+				console.log(res.json()[0]);
 			});
 			var length = data.length;
 			var table = document.getElementById("table1");
