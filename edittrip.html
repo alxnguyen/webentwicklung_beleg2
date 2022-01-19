@@ -318,7 +318,7 @@
 			btn2.onclick = function() {lösche(row.rowIndex)};
 			löschen.className = "bCollumn";
 			löschen.appendChild(btn2);
-			trip = JSON.stringify({tripname: name.innerHTML, land: land.innerHTML, start: start.innerHTML, ende: ende.innerHTML, date: Date.now()});
+			trip = JSON.stringify({tripname: name.innerHTML, land: land.innerHTML, start: start.innerHTML, end: ende.innerHTML, date: Date.now()});
 			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
 				method: "POST",
 				headers: {"Content-Type": "application/json"},
@@ -427,7 +427,7 @@
 		
 		function format(date)    {
             var year=date.substring(0,4);
-            var month=date.substring(5, 6);
+            var month=date.substring(5, 7);
             var day=date.substring(8);
             return(day+"."+month+"."+year);
         }
