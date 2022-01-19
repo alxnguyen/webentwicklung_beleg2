@@ -327,12 +327,8 @@
 			})
 			.then(res => 
 				{
-					if(res.status === 201) {
-						window.location.href = "./map.html";
-					}
-
 					if(res.status === 400) {
-						document.getElementById("warning").innerHTML = "Login fehlgeschlagen.";
+						document.getElementById("warning").innerHTML = "Hinzufügen fehlgeschlagen.";
 					}
 				})
 			.catch(error => console.log(error));
@@ -382,10 +378,12 @@
 			}).then(res => {
 				data = res.body;
 			})
-			var length = localStorage.length;
+			var length = data.length;
 			var table = document.getElementById("table1");
 			var trips = [];
 			for(var entry in data) {
+				formatted_entry = JSON.parse(data[entry]);
+				console.log(formatted_entry);
 				if(length === 0) {break;}
 				trips.push(JSON.parse(data[entry]));
 				length--;
