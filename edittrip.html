@@ -318,7 +318,7 @@
 			btn2.onclick = function() {lösche(row.rowIndex)};
 			löschen.className = "bCollumn";
 			löschen.appendChild(btn2);
-			trip = JSON.stringify([name.innerHTML, land.innerHTML, start.innerHTML, ende.innerHTML, Date.now()]);
+			trip = JSON.stringify({tripname: name.innerHTML, land: land.innerHTML, start: start.innerHTML, end: ende.innerHTML, date: Date.now()});
 			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
 				method: "POST",
 				headers: {"Content-Type": "application/json"},
@@ -383,9 +383,9 @@
 			var length = localStorage.length;
 			var table = document.getElementById("table1");
 			var trips = [];
-			for(var entry in localStorage) {
+			for(var entry in data) {
 				if(length === 0) {break;}
-				trips.push(JSON.parse(localStorage.getItem(entry)));
+				trips.push(JSON.parse(data[entry]));
 				length--;
 			}
 			var sortedTrips = trips.sort(function(a, b) {
