@@ -378,7 +378,7 @@
 				credentials: "include"
 			}).then(res => {
 				console.log(res.json());
-				Promise.resolve(res.json()).then(value => {
+				Promise.resolve(res).then(value => {
 					console.log(value);
 				});
 			});
