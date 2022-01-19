@@ -383,6 +383,7 @@
 				var trips = [];
 				for(var trip in data) {
 					if(length === 0) {break;}
+					console.log(trip);
 					console.log(trip.tripname);
 					new_entry = [trip.tripname, trip.land, trip.start, trip.end, trip.created];
 					console.log(new_entry);
