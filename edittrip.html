@@ -323,6 +323,7 @@
 				method: "POST",
 				headers: {"Content-Type": "application/json"},
 				body: trip,
+				credentials: "include"
 			})
 			.then(res => 
 				{
@@ -377,6 +378,7 @@
 			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
 				method: "GET",
 				headers: {"Content-Type": "application/json"},
+				credentials: "include"
 			}).then(res => {
 				data = res.body;
 			})
