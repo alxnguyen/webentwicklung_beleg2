@@ -376,12 +376,9 @@
 				method: "GET",
 				headers: {"Content-Type": "application/json"},
 				credentials: "include"
-			}).then(res => {
-				console.log(res.json());
-			}).then(data => {
-				for(var element in data) {
-					console.log(element);
-				}
+			}).then(res => res.json())
+			.then(data => {
+				console.log(data);
 			});
 			var length = data.length;
 			var table = document.getElementById("table1");
