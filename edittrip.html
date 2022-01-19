@@ -271,6 +271,7 @@
 		</table>
     </div>
 	<script>
+
 		function trip_manager(index) {
             button_name = document.getElementById("create_btn").name;
             if(button_name === "create") {
@@ -377,7 +378,7 @@
 				credentials: "include"
 			}).then(res => {
 				data = res.body;
-				console.log(res);
+				console.log(JSON.parse(res));
 			})
 			var length = data.length;
 			var table = document.getElementById("table1");
