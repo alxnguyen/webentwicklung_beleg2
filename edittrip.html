@@ -328,6 +328,9 @@
 			})
 			.then(res => 
 				{
+					if(res.status === 201) {
+						load_site();
+					}
 					if(res.status === 400) {
 						document.getElementById("warning").innerHTML = "Hinzufügen fehlgeschlagen.";
 					}
@@ -355,8 +358,24 @@
 			land.innerHTML = document.getElementById("land_list").value;
 			start.innerHTML = document.getElementById("start").value;
 			ende.innerHTML = document.getElementById("ende").value;
-			trip = [name.innerHTML, land.innerHTML, start.innerHTML, ende.innerHTML, old_date];
-			localStorage.setItem(name.innerHTML, JSON.stringify(trip));
+			trip = JSON.stringify({tripname: name.innerHTML, land: land.innerHTML, start: start.innerHTML, end: ende.innerHTML, date: Date.now()});
+			
+			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
+				method: "PUT",
+				headers: {"Content-Type": "application/json"},
+				body: trip,
+				credentials: "include"
+			})
+			.then(res => 
+				{
+					if(res.status === 201) {
+						load_site();
+					}
+					if(res.status === 400) {
+						document.getElementById("warning").innerHTML = "Bearbeiten fehlgeschlagen.";
+					}
+				})
+			.catch(error => console.log(error));
 			button.name = "create";
 			button.innerHTML = "Reise erstellen";
 		}
@@ -365,9 +384,23 @@
 			var button = document.getElementById("create_btn");
 			var name = document.getElementById("table1").rows[index].cells[0].innerHTML;
 			if(button.name === "create") {
-				document.getElementById("table1").deleteRow(index);
-				localStorage.removeItem(name);
-			}		
+				var id = document.getElementbyId("table1").rows[index].cells[6];
+				
+				fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip/" + id, {
+				method: "DELETE",
+				credentials: "include"
+				})
+				.then(res => 
+					{
+						if(res.status === 201) {
+							load_site();
+						}
+						if(res.status === 400) {
+							document.getElementById("warning").innerHTML = "Löschen fehlgeschlagen.";
+						}
+					})
+				.catch(error => console.log(error));
+				}		
 		}
 		
 		function load_site() {
@@ -384,12 +417,12 @@
 				for(var index in data) {
 					if(length === 0) {break;}
 					trip = data[index];
-					new_entry = [trip.tripname, trip.land, trip.start, trip.end, trip.created];
+					new_entry = [trip.id, trip.tripname, trip.land, trip.start, trip.end, trip.created];
 					trips.push(new_entry);
 					length--;
 				}
 				var sortedTrips = trips.sort(function(a, b) {
-				return a[4] - b[4];
+				return a[5] - b[5];
 				});
 
 				for(var entry in sortedTrips) {	
@@ -405,10 +438,10 @@
 				ende.id = "" + row.rowIndex + "_3";
 				var bearbeiten = row.insertCell(4);
 				var löschen = row.insertCell(5);
-				name.innerHTML = trip[0];
-				land.innerHTML = trip[1];
-				start.innerHTML = trip[2];
-				ende.innerHTML = trip[3];
+				name.innerHTML = trip[1];
+				land.innerHTML = trip[2];
+				start.innerHTML = trip[3];
+				ende.innerHTML = trip[4];
 				var btn = document.createElement("BUTTON");
 				btn.id = "button" + row.rowIndex + "";
 				btn.innerHTML = "bearbeiten";
@@ -421,6 +454,9 @@
 				btn2.onclick = function() {lösche(row.rowIndex)};
 				löschen.className = "bCollumn";
 				löschen.appendChild(btn2);
+				var hidden_id = row.insertCell(6);
+				var p_ele = document.createElement("p")
+				p_ele.id = trip[0];
 				}
 			});
 		}
