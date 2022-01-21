@@ -385,6 +385,7 @@
 			var name = document.getElementById("table1").rows[index].cells[0].innerHTML;
 			if(button.name === "create") {
 				var id = document.getElementById("table1").rows[index].cells[6];
+				console.log(id)
 				
 				fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip/" + id, {
 				method: "DELETE",
