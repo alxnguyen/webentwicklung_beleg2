@@ -385,7 +385,6 @@
 			var name = document.getElementById("table1").rows[index].cells[0].innerHTML;
 			if(button.name === "create") {
 				var id = document.getElementById("table1").rows[index].cells[6].id;
-				console.log(id)
 				
 				fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip/" + id, {
 				method: "DELETE",
@@ -458,6 +457,7 @@
 				var hidden_id = row.insertCell(6);
 				var p_ele = document.createElement("p")
 				p_ele.id = trip[0];
+				console.log(p_ele.id);
 				}
 			});
 		}
