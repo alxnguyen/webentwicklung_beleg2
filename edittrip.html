@@ -405,9 +405,7 @@
 		}
 		
 		function clearData() {
-			while(document.getElementById("table1").hasChildNodes()) {
-				document.getElementById("table1").removeChild(document.getElementById("table1").firstChild);
-			}
+			$("#table1:not(:first)").remove();
 		}
 
 		function load_site() {
