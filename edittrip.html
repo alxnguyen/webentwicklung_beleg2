@@ -290,35 +290,6 @@
 				window.alert("Reise mit dem Namen existiert bereits.");
 				return;
 			}
-			var table = document.getElementById("table1");
-			var row = table.insertRow();
-			var name = row.insertCell(0);
-			name.id = "" + row.rowIndex + "_0";
-			var land = row.insertCell(1);
-			land.id = "" + row.rowIndex + "_1";
-			var start = row.insertCell(2);
-			start.id = "" + row.rowIndex + "_2";
-			var ende = row.insertCell(3);
-			ende.id = "" + row.rowIndex + "_3";
-			var bearbeiten = row.insertCell(4);
-			var löschen = row.insertCell(5);
-			name.innerHTML = trip_name;
-			
-			land.innerHTML = document.getElementById("land_list").value;
-			start.innerHTML = format(document.getElementById("start").value);
-			ende.innerHTML = format(document.getElementById("ende").value);
-			var btn = document.createElement("BUTTON");
-			btn.id = "button" + row.rowIndex + "";
-			btn.innerHTML = "bearbeiten";
-			btn.onclick = function() {bearbeite(row.rowIndex)};
-			bearbeiten.className = "bCollumn";
-			bearbeiten.appendChild(btn);
-			var btn2 = document.createElement("BUTTON");
-			btn2.id = "button_del" + row.rowIndex + "";
-			btn2.innerHTML = "löschen";
-			btn2.onclick = function() {lösche(row.rowIndex)};
-			löschen.className = "bCollumn";
-			löschen.appendChild(btn2);
 			trip = JSON.stringify({tripname: name.innerHTML, land: land.innerHTML, start: start.innerHTML, end: ende.innerHTML, date: Date.now()});
 			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
 				method: "POST",
