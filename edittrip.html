@@ -405,7 +405,8 @@
 		}
 		
 		function clearData() {
-			$("#table1:not(:first)").remove();
+			var mytbl = document.getElementById("table1");
+			mytbl.getElementsByTagName("tbody")[0].innerHTML = mytbl.rows[0].innerHTML;
 		}
 
 		function load_site() {
