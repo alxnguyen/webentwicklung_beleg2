@@ -359,8 +359,9 @@
 			start.innerHTML = document.getElementById("start").value;
 			ende.innerHTML = document.getElementById("ende").value;
 			trip = JSON.stringify({tripname: name.innerHTML, land: land.innerHTML, start: start.innerHTML, end: ende.innerHTML, date: Date.now()});
+			var id = document.getElementById("table1").rows[index].id
 			
-			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
+			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip" + id, {
 				method: "PUT",
 				headers: {"Content-Type": "application/json"},
 				body: trip,
@@ -384,8 +385,7 @@
 			var button = document.getElementById("create_btn");
 			var name = document.getElementById("table1").rows[index].cells[0].innerHTML;
 			if(button.name === "create") {
-				var id = document.getElementById("table1").rows[index].cells[6].id;
-				console.log(id);
+				var id = document.getElementById("table1").rows[index].id
 				
 				fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip/" + id, {
 				method: "DELETE",
@@ -435,6 +435,7 @@
 				for(var entry in sortedTrips) {	
 				var trip = sortedTrips[entry];
 				let row = table.insertRow();
+				row.id = trip[0]
 				var name = row.insertCell(0);
 				name.id = "" + row.rowIndex + "_0";
 				var land = row.insertCell(1);
@@ -461,8 +462,6 @@
 				btn2.onclick = function() {lösche(row.rowIndex)};
 				löschen.className = "bCollumn";
 				löschen.appendChild(btn2);
-				var hidden_id = row.insertCell(6);
-				hidden_id.id = trip[0];
 				}
 			});
 		}
