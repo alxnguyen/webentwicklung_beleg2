@@ -27,6 +27,20 @@
 }).addTo(mymap);
 
 	var trips = [];
+  fetch("https://webentwicklung-beleg-backend.herokuapp.com/map", {
+				method: "GET",
+				headers: {"Content-Type": "application/json"},
+				credentials: "include"
+			}).then(res => res.json())
+			.then(data => {
+        var length = data.length;
+        for(var index in data) {
+					if(length === 0) {break;}
+					trips.push(data[index]);
+					length--;
+				}
+			});
+
 	var length = localStorage.length;
 	for(entry in localStorage) {
 		if(length == 0) {break;}
