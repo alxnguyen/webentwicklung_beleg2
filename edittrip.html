@@ -343,7 +343,7 @@
 			button.name = index;
 			document.getElementById("tripname").value = document.getElementById("table1").rows[index].cells[0].innerHTML;
 			document.getElementById("land_list").value = document.getElementById("table1").rows[index].cells[1].innerHTML;
-			document.getElementById("start").value = document.getElementById("table1").rows[index].cells[2].innerHTML;
+			document.getElementById("start").value = deformat(document.getElementById("table1").rows[index].cells[2].innerHTML);
 			document.getElementById("ende").value = deformat(document.getElementById("table1").rows[index].cells[3].innerHTML);
 			button.innerHTML = "Finalisieren";
 		}
