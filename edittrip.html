@@ -358,7 +358,7 @@
 			trip = JSON.stringify({tripname: name.innerHTML, land: land.innerHTML, start: start.innerHTML, end: ende.innerHTML, date: Date.now()});
 			var id = document.getElementById("table1").rows[index].id
 			
-			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip" + id, {
+			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip/" + id, {
 				method: "PUT",
 				headers: {"Content-Type": "application/json"},
 				body: trip,
