@@ -351,9 +351,6 @@
 			var land = document.getElementById("table1").rows[index].cells[1];
 			var start = document.getElementById("table1").rows[index].cells[2];
 			var ende = document.getElementById("table1").rows[index].cells[3];
-			var trip = JSON.parse(localStorage.getItem(name.innerHTML));
-			var old_date = trip[4];
-			localStorage.removeItem(name.innerHTML);
 			name.innerHTML = document.getElementById("tripname").value;
 			land.innerHTML = document.getElementById("land_list").value;
 			start.innerHTML = document.getElementById("start").value;
