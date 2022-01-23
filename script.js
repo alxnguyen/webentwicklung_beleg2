@@ -19,11 +19,7 @@ function login() {
                 document.getElementById("warning").innerHTML = "Login fehlgeschlagen.";
             }
         })
-    .catch(error => 
-    {
-        console.log(error);
-        document.getElementById("warning").innerHTML = "Connection timed out.";
-    });
+    .catch(error => console.log(error));
 }
 
 function register() {
