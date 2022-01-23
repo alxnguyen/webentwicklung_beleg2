@@ -341,6 +341,10 @@
 		function bearbeite(index) {
 			var button = document.getElementById("create_btn");
 			button.name = index;
+			document.getElementById("tripname").value = document.getElementById("table1").rows[index].cells[0];
+			document.getElementById("land_list").value = document.getElementById("table1").rows[index].cells[1];
+			document.getElementById("start").value = document.getElementById("table1").rows[index].cells[2];
+			document.getElementById("ende").value = document.getElementById("table1").rows[index].cells[3];
 			button.innerHTML = "Finalisieren";
 		}
 		
