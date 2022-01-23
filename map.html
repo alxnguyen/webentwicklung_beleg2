@@ -39,8 +39,6 @@
 					trips.push(data[index]);
 					length--;
 		    }
-
-        const visitedCountries = trips;
 	    });
 
 const loadData = async () => {
@@ -53,7 +51,7 @@ const displayData = async () => {
   const filteredData = {
     ...geoJson,
     features: geoJson.features.filter(feature => 
-                                      !visitedCountries.includes(feature.properties.iso_a2))
+                                      !trips.includes(feature.properties.iso_a2))
   };
   L.geoJSON(filteredData).addTo(mymap);
 }
