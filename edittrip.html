@@ -290,6 +290,7 @@
 				window.alert("Reise mit dem Namen existiert bereits.");
 				return;
 			}
+
 			trip = JSON.stringify({tripname: trip_name, land: document.getElementById("land_list").value, start: format(document.getElementById("start").value), end: format(document.getElementById("ende").value), date: Date.now()});
 			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
 				method: "POST",
@@ -321,6 +322,8 @@
 		
 		function editTrip() {
 			trip = JSON.stringify({tripname: document.getElementById("tripname").value, land: document.getElementById("land_list").value, start: format(document.getElementById("start").value), end: format(document.getElementById("ende").value), date: Date.now()});
+			var button = document.getElementById("create_btn");
+			index = button.name;
 			var id = document.getElementById("table1").rows[index].id;
 			
 			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip/" + id, {
