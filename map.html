@@ -27,7 +27,7 @@
 }).addTo(mymap);
 
 	var trips = [];
-  fetch("https://webentwicklung-beleg-backend.herokuapp.com/map", {
+  await fetch("https://webentwicklung-beleg-backend.herokuapp.com/map", {
 				method: "GET",
 				headers: {"Content-Type": "application/json"},
 				credentials: "include"
