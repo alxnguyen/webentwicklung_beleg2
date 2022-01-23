@@ -2,28 +2,28 @@ function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const json_data = JSON.stringify({email: email, password: password});
-    try {
-        fetch("https://webentwicklung-beleg-backend.herokuapp.com/", {
-            method: "POST",
-            mode: "cors",
-            headers: {"Content-Type": "application/json"},
-            body: json_data,
-            credentials: "include"
+    fetch("https://webentwicklung-beleg-backend.herokuapp.com/", {
+        method: "POST",
+        mode: "cors",
+        headers: {"Content-Type": "application/json"},
+        body: json_data,
+        credentials: "include"
+    })
+    .then(res => 
+        {
+            if(res.status === 201) {
+                window.location.href = "./map.html";
+            }
+
+            if(res.status === 400) {
+                document.getElementById("warning").innerHTML = "Login fehlgeschlagen.";
+            }
         })
-        .then(res => 
-            {
-                if(res.status === 201) {
-                    window.location.href = "./map.html";
-                }
-    
-                if(res.status === 400) {
-                    document.getElementById("warning").innerHTML = "Login fehlgeschlagen.";
-                }
-            })
-        .catch(error => console.log(error));
-    } catch {
+    .catch(error => 
+    {
+        console.log(error);
         document.getElementById("warning").innerHTML = "Login fehlgeschlagen.";
-    }
+    });
 }
 
 function register() {
