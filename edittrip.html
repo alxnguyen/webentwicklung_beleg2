@@ -321,13 +321,13 @@
 		}
 		
 		function editTrip() {
-			trip = JSON.stringify({tripname: document.getElementById("tripname").value, land: document.getElementById("land_list").value, start: format(document.getElementById("start").value), end: format(document.getElementById("ende").value), date: Date.now()});
+			trip = JSON.stringify({tripname: document.getElementById("tripname").value, land: document.getElementById("land_list").value, start: format(document.getElementById("start").value), end: format(document.getElementById("ende").value)});
 			var button = document.getElementById("create_btn");
 			index = button.name;
 			var id = document.getElementById("table1").rows[index].id;
 			
 			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip/" + id, {
-				method: "PUT",
+				method: "PATCH",
 				headers: {"Content-Type": "application/json"},
 				body: trip,
 				credentials: "include"
