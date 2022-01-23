@@ -344,7 +344,7 @@
 			document.getElementById("tripname").value = document.getElementById("table1").rows[index].cells[0].innerHTML;
 			document.getElementById("land_list").value = document.getElementById("table1").rows[index].cells[1].innerHTML;
 			document.getElementById("start").value = document.getElementById("table1").rows[index].cells[2].innerHTML;
-			document.getElementById("ende").value = document.getElementById("table1").rows[index].cells[3].innerHTML;
+			document.getElementById("ende").value = deformat(document.getElementById("table1").rows[index].cells[3].innerHTML);
 			button.innerHTML = "Finalisieren";
 		}
 		
@@ -473,5 +473,12 @@
             var day=date.substring(8);
             return(day+"."+month+"."+year);
         }
+
+		function deformat(date) {
+			var day = date.substring(0, 2);
+			var month = date.substring(3, 5);
+			var year = date.substring(6, 10);
+			return(year + "/" + month + "/" + day);
+		}
 	</script>
 </body>
