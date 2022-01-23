@@ -27,7 +27,7 @@
 }).addTo(mymap);
 
 	var trips = [];
-  await fetch("https://webentwicklung-beleg-backend.herokuapp.com/map", {
+  fetch("https://webentwicklung-beleg-backend.herokuapp.com/map", {
 				method: "GET",
 				headers: {"Content-Type": "application/json"},
 				credentials: "include"
@@ -39,6 +39,8 @@
 					trips.push(data[index]);
 					length--;
 		    }
+
+        displayData();
 	    });
 
 const loadData = async () => {
@@ -55,7 +57,5 @@ const displayData = async () => {
   };
   L.geoJSON(filteredData).addTo(mymap);
 }
-
-displayData();
 	</script>
 </body>
