@@ -22,7 +22,7 @@ function login() {
     .catch(error => 
     {
         console.log(error);
-        document.getElementById("warning").innerHTML = "Login fehlgeschlagen.";
+        document.getElementById("warning").innerHTML = "Connection timed out.";
     });
 }
 
