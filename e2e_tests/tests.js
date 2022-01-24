@@ -78,7 +78,6 @@ test("unsuccessful add#1", async t => {
         .click(landOption.withText("Deutschland"))
         .typeText("#start", "2022-01-24")
         .click("#create_btn")
-        .takeScreenshot("./screenshots")
         .expect(rows).eql(1);
 });
 
@@ -93,7 +92,6 @@ test("unsuccessful add#2", async t => {
         .typeText("#start", "2022-01-24")
         .typeText("#ende", "2022-01-22")
         .click("#create_btn")
-        .takeScreenshot("./screenshots")
         .expect(rows).eql(1);
 });
 
