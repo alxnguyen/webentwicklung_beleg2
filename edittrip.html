@@ -277,19 +277,16 @@
             if(button_name === "create") {
                 if(tripname.value!=""&&start.value!=""&&ende.value!=""&&ende.value>=start.value)    {
                     addTrip();
-                }
+                } else {
+					window.alert("Bitte alle Felder ausfüllen.");
+				}
             }
             else {
                 editTrip();
             }
         }
 		function addTrip() {
-			var trip_name = document.getElementById("tripname").value
-			var trip = JSON.parse(localStorage.getItem(trip_name));
-			if(trip) {
-				window.alert("Reise mit dem Namen existiert bereits.");
-				return;
-			}
+			var trip_name = document.getElementById("tripname").value;
 
 			trip = JSON.stringify({tripname: trip_name, land: document.getElementById("land_list").value, start: format(document.getElementById("start").value), end: format(document.getElementById("ende").value), date: Date.now()});
 			fetch("https://webentwicklung-beleg-backend.herokuapp.com/edittrip", {
@@ -302,6 +299,10 @@
 				{
 					if(res.status === 201) {
 						load_site();
+					}
+
+					if(res.status === 500) {
+						window.alert("Hinzufügen fehlgeschlagen.");
 					}
 				})
 			.catch(error => console.log(error));
@@ -334,6 +335,14 @@
 					if(res.status === 200) {
 						load_site();
 					}
+
+					if(res.status === 400) {
+						window.alert("Trip konnte nicht geupdatet werden.")
+					}
+
+					if(res.status === 409) {
+						window.alert("User hat keinen Zugriff auf die Seite.")
+					}
 				})
 			.catch(error => console.log(error));
 			button.name = "create";
@@ -354,6 +363,14 @@
 					{
 						if(res.status === 200) {
 							load_site();
+						}
+
+						if(res.status === 400) {
+						window.alert("Trip konnte nicht gelöscht werden.")
+						}
+
+						if(res.status === 409) {
+						window.alert("User hat keinen Zugriff auf die Seite.")
 						}
 					})
 				.catch(error => console.log(error));

@@ -52,10 +52,8 @@ fixture`trips`.page`https://hungry-tereshkova-7ccef7.netlify.app/edittrip.html`;
 const landSelect = Selector("#land_list");
 const landOption = landSelect.find("option");
 
-test("successful add", async t => {
-    var table = await Selector("#table1");
-    var dataRows = table.find('tbody > tr');
-    var dataRowCount = await dataRows.count;
+test("successful add and delete", async t => {
+    var rows = Selector("table tr").count;
 
     await t
         .useRole(testUser)
@@ -65,14 +63,13 @@ test("successful add", async t => {
         .typeText("#start", "2022-01-24")
         .typeText("#ende", "2022-01-26")
         .click("#create_btn")
-        .expect(await Selector("#table1").find("tbody > tr").count).eql(1)
-        .click("#button_del1");
+        .expect(rows).eql(2)
+        .click("#button_del1")
+        .expect(rows).eql(1);
 });
 
 test("unsuccessful add#1", async t => {  
-    var table = await Selector("#table1");
-    var dataRows = table.find('tbody > tr');
-    var dataRowCount = await dataRows.count;
+    var rows = Selector("table tr").count;
 
     await t
         .useRole(testUser)
@@ -81,13 +78,11 @@ test("unsuccessful add#1", async t => {
         .click(landOption.withText("Deutschland"))
         .typeText("#start", "2022-01-24")
         .click("#create_btn")
-        .expect(await Selector("#table1").find("tbody > tr").count).eql(0);
+        .expect(rows).eql(1);
 });
 
 test("unsuccessful add#2", async t => {
-    var table = await Selector("#table1");
-    var dataRows = table.find('tbody > tr');
-    var dataRowCount = await dataRows.count;
+    var rows = Selector("table tr").count;
 
     await t
         .useRole(testUser)
@@ -97,11 +92,11 @@ test("unsuccessful add#2", async t => {
         .typeText("#start", "2022-01-24")
         .typeText("#ende", "2022-01-22")
         .click("#create_btn")
-        .expect(await Selector("#table1").find("tbody > tr").count).eql(0);
+        .expect(rows).eql(1);
 });
 
 test("successful edit", async t => {
-    var tripname = ClientFunction(() => document.getElementById("1_0").innerHTML);
+    var tripname = Selector("table").find("td").nth(0).innerText;
 
     await t
         .useRole(testUser)
