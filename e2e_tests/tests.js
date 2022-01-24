@@ -2,14 +2,11 @@ import { Selector, ClientFunction, Role } from 'testcafe';
 
 fixture`login`.page`https://hungry-tereshkova-7ccef7.netlify.app/`;
 
-const landSelect = Selector("#land_list");
-const landOption = landSelect.find("option");
-
 const testUser = Role("https://hungry-tereshkova-7ccef7.netlify.app/", async t => {
     await t
     .typeText("#email", "user2@email.com")
     .typeText("#password", "password2")
-    .click("#login_btn")
+    .click("#login_btn");
 });
 
 test("successful login", async t => {
@@ -22,7 +19,6 @@ test("successful login", async t => {
 });
 
 test("unsuccessful login#1", async t => {
-    const getLocation = ClientFunction(() => document.location.href);
     await t
         .typeText("#email", "kevin@email.com")
         .typeText("#password", "password1")
@@ -31,7 +27,6 @@ test("unsuccessful login#1", async t => {
 });
 
 test("unsuccessful login#2", async t => {
-    const getLocation = ClientFunction(() => document.location.href);
     await t
         .typeText("#email", "kevin@email.com")
         .click("#login_btn")
@@ -39,7 +34,6 @@ test("unsuccessful login#2", async t => {
 });
 
 test("unsuccessful login#3", async t => {
-    const getLocation = ClientFunction(() => document.location.href);
     await t
         .typeText("#email", "user1@email.com")
         .typeText("#password", "asdf")
@@ -48,7 +42,6 @@ test("unsuccessful login#3", async t => {
 });
 
 test("unsuccessful login#4", async t => {
-    const getLocation = ClientFunction(() => document.location.href);
     await t
         .click("#login_btn")
         .expect(Selector("#warning").innerText).eql("Login fehlgeschlagen.");
@@ -56,7 +49,14 @@ test("unsuccessful login#4", async t => {
 
 fixture`trips`.page`https://hungry-tereshkova-7ccef7.netlify.app/edittrip.html`;
 
+const landSelect = Selector("#land_list");
+const landOption = landSelect.find("option");
+
 test("successful add", async t => {
+    var table = await Selector("#table1");
+    var dataRows = table.find('tbody > tr');
+    var dataRowCount = await dataRows.count;
+
     await t
         .useRole(testUser)
         .typeText("#tripname", "Reise A")
@@ -65,9 +65,57 @@ test("successful add", async t => {
         .typeText("#start", "2022-01-24")
         .typeText("#ende", "2022-01-26")
         .click("#create_btn")
-        .expect(Selector("#1_0").innerText).eql("Reise A")
-        .expect(Selector("#1_1").innerText).eql("DE")
-        .expect(Selector("#1_2").innerText).eql("24.01.2022")
-        .expect(Selector("#1_3").innerText).eql("26.01.2022")
+        .expect(await Selector("#table1").find("tbody > tr").count).eql(1)
+        .click("#button_del1");
+});
+
+test("unsuccessful add#1", async t => {  
+    var table = await Selector("#table1");
+    var dataRows = table.find('tbody > tr');
+    var dataRowCount = await dataRows.count;
+
+    await t
+        .useRole(testUser)
+        .typeText("#tripname", "Reise A")
+        .click(landSelect)
+        .click(landOption.withText("Deutschland"))
+        .typeText("#start", "2022-01-24")
+        .click("#create_btn")
+        .expect(await Selector("#table1").find("tbody > tr").count).eql(0);
+});
+
+test("unsuccessful add#2", async t => {
+    var table = await Selector("#table1");
+    var dataRows = table.find('tbody > tr');
+    var dataRowCount = await dataRows.count;
+
+    await t
+        .useRole(testUser)
+        .typeText("#tripname", "Reise A")
+        .click(landSelect)
+        .click(landOption.withText("Deutschland"))
+        .typeText("#start", "2022-01-24")
+        .typeText("#ende", "2022-01-22")
+        .click("#create_btn")
+        .expect(await Selector("#table1").find("tbody > tr").count).eql(0);
+});
+
+test("successful edit", async t => {
+    var tripname = ClientFunction(() => document.getElementById("1_0").innerHTML);
+
+    await t
+        .useRole(testUser)
+        .typeText("#tripname", "Reise A")
+        .click(landSelect)
+        .click(landOption.withText("Deutschland"))
+        .typeText("#start", "2022-01-24")
+        .typeText("#ende", "2022-01-26")
+        .click("#create_btn")
+        .click("#button1")
+        .click("#tripname")
+        .pressKey("ctrl+a delete")
+        .typeText("#tripname", "Reise B")
+        .click("#create_btn")
+        .expect(tripname).eql("Reise B")
         .click("#button_del1");
 });

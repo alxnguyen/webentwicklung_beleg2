@@ -303,9 +303,6 @@
 					if(res.status === 201) {
 						load_site();
 					}
-					if(res.status === 400) {
-						document.getElementById("warning").innerHTML = "Hinzufügen fehlgeschlagen.";
-					}
 				})
 			.catch(error => console.log(error));
 		}
@@ -337,9 +334,6 @@
 					if(res.status === 200) {
 						load_site();
 					}
-					if(res.status === 400) {
-						document.getElementById("warning").innerHTML = "Bearbeiten fehlgeschlagen.";
-					}
 				})
 			.catch(error => console.log(error));
 			button.name = "create";
@@ -360,9 +354,6 @@
 					{
 						if(res.status === 200) {
 							load_site();
-						}
-						if(res.status === 400) {
-							document.getElementById("warning").innerHTML = "Löschen fehlgeschlagen.";
 						}
 					})
 				.catch(error => console.log(error));
