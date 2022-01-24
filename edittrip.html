@@ -260,6 +260,7 @@
 			Ende:
 			<input type="date" name="Enddatum" id="ende" required>
 			<button type="submit" id="create_btn" name="create" onclick="trip_manager(0)">Reise erstellen</button>
+			<p id="warning2"></p>
 		</div>
 		<table id="table1">
 			<tr>
@@ -278,7 +279,7 @@
                 if(tripname.value!=""&&start.value!=""&&ende.value!=""&&ende.value>=start.value)    {
                     addTrip();
                 } else {
-					window.alert("Bitte alle Felder ausfüllen.");
+					document.getElementById("warning2").innerHTML = "Bitte alle Felder ausfüllen.";
 				}
             }
             else {
@@ -302,7 +303,7 @@
 					}
 
 					if(res.status === 500) {
-						window.alert("Hinzufügen fehlgeschlagen.");
+						document.getElementById("warning2").innerHTML = "Hinzufügen fehlgeschlagen.";
 					}
 				})
 			.catch(error => console.log(error));
@@ -337,11 +338,11 @@
 					}
 
 					if(res.status === 400) {
-						window.alert("Trip konnte nicht geupdatet werden.")
+						document.getElementById("warning2").innerHTML = "Trip konnte nicht geupdatet werden.";
 					}
 
 					if(res.status === 409) {
-						window.alert("User hat keinen Zugriff auf die Seite.")
+						document.getElementById("warning2").innerHTML = "User hat keinen Zugriff auf die Seite.";
 					}
 				})
 			.catch(error => console.log(error));
@@ -366,11 +367,11 @@
 						}
 
 						if(res.status === 400) {
-						window.alert("Trip konnte nicht gelöscht werden.")
+							document.getElementById("warning2").innerHTML = "Trip konnte nicht gelöscht werden.";
 						}
 
 						if(res.status === 409) {
-						window.alert("User hat keinen Zugriff auf die Seite.")
+							document.getElementById("warning2").innerHTML = "User hat keinen Zugriff auf die Seite.";
 						}
 					})
 				.catch(error => console.log(error));
