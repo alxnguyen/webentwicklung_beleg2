@@ -1,9 +1,16 @@
-import { Selector, ClientFunction } from 'testcafe';
+import { Selector, ClientFunction, Role } from 'testcafe';
 
 fixture`login`.page`https://hungry-tereshkova-7ccef7.netlify.app/`;
 
 const landSelect = Selector("#land_list");
 const landOption = landSelect.find("option");
+
+const testUser = Role("https://hungry-tereshkova-7ccef7.netlify.app/", async t => {
+    await t
+    .typeText("#email", "user2@email.com")
+    .typeText("#password", "password2")
+    .click("#login_btn")
+});
 
 test("successful login", async t => {
     const getLocation = ClientFunction(() => document.location.href);
@@ -47,12 +54,11 @@ test("unsuccessful login#4", async t => {
         .expect(Selector("#warning").innerText).eql("Login fehlgeschlagen.");
 });
 
+fixture`trips`.page`https://hungry-tereshkova-7ccef7.netlify.app/edittrip.html`;
+
 test("successful add", async t => {
     await t
-        .typeText("#email", "user2@email.com")
-        .typeText("#password", "password2")
-        .click("#login_btn")
-        .click("edittrip")
+        .useRole(testUser)
         .typeText("#tripname", "Reise A")
         .click(landSelect)
         .click(landOption.withText("Deutschland"))
